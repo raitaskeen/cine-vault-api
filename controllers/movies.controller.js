@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Movie = require('../models/movie.model');
 
 exports.createMovie = async (req, res) => {
@@ -22,24 +23,38 @@ exports.updateMovie = async (req, res) => {
     try {
         const id = req.params.id;
 
-        const newData = req.body;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                error: "Invalid Movie ID"
+            });
+        }
 
-        const updatedMovie = await Movie.findByIdAndUpdate(id, newData, { 
+        const updatedMovie = await Movie.findByIdAndUpdate(id, req.body, { 
         new: true,
         runValidators: true
         });
+
     if (!updatedMovie) {
         return res.status(404).json({ 
-            success: false, error: "Movie not found" });
+            success: false, 
+            error: "Movie not found" });
         }
     res.status(200).json({ 
         success: true, 
         data: updatedMovie 
     });
 } catch (error) {
-    res.status(400).json({
+    if (error.name === 'ValidationError') {
+        return res.status(400).json({
+            success: false,
+            error: error.message
+        });
+    }
+
+    return res.status(500).json({
         success: false,
-        error: error.message
+        error: "Server Error"
     });
 }
 };
