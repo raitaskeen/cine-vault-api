@@ -58,3 +58,34 @@ exports.updateMovie = async (req, res) => {
     });
 }
 };
+
+exports.deleteMovie = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                error: "Invalid Movie ID"
+            });
+    }
+
+    const movie = await Movie.findByIdAndDelete(id);
+
+    if (!movie) {
+        return res.status(404).json({
+            success: false,
+            error: "Movie not found"
+        });
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
+    });
+} catch (error) {
+    return res.status(500).json({
+        success: false,
+        error: "Server Error"
+    });
+}
+};
