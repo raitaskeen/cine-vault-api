@@ -1,16 +1,18 @@
-# Movies RESTful API
+# CineVault API (Backend)
 
-A modular backend service for managing a movie database built using Node.js, Express.js, and MongoDB. This project follows the Model-View-Controller (MVC) architectural pattern and provides complete CRUD (Create, Read, Update, Delete) functionality.
+A robust, modular RESTful API service for managing a comprehensive movie database. Built with Node.js, Express.js, and MongoDB, this backend is designed following the MVC (Model-View-Controller) architecture to provide scalable and efficient CRUD operations.
+
+This API serves as the backbone for the frontend React client, handling data validation, routing, and database communication.
 
 ---
 
 ## Features
 
-- **MVC Architecture**: Clear separation of concerns into Models, Controllers, and Routes.
-- **Full CRUD Operations**: Endpoints to create, read, update, and delete movie records.
-- **Data Validation**: Schema-level validation using Mongoose.
-- **Environment Management**: Configuration handled safely via `dotenv`.
-- **Database Integration**: Connected to MongoDB via Mongoose.
+- **MVC Architecture**: Clean separation of business logic, database schemas, and API routes.
+- **Full CRUD Operations**: Endpoints to dynamically create, read, update, and delete movie records.
+- **Schema Validation**: Strict data modeling and validation using Mongoose.
+- **CORS Configured**: Safely handles Cross-Origin requests from the frontend client.
+- **Environment Management**: Secure handling of database URIs and ports via dotenv.
 
 ---
 
@@ -18,80 +20,49 @@ A modular backend service for managing a movie database built using Node.js, Exp
 
 - **Runtime**: Node.js
 - **Framework**: Express.js
-- **Database**: MongoDB
+- **Database**: MongoDB (Atlas/Local)
 - **ODM**: Mongoose
-- **Testing**: Postman
-
----
-
-## Project Structure
-
-```text
-movies-api/
-├── config/
-│   └── db.js                 # Database connection setup
-├── controllers/
-│   └── movies.controller.js  # Controller functions (business logic)
-├── models/
-│   └── movie.model.js        # Mongoose database schema
-├── routes/
-│   └── movies.routes.js      # API route definitions
-├── .env                      # Environment variables
-├── .gitignore                # Git ignore rules
-├── package.json              # Project dependencies and scripts
-└── server.js                 # Application entry point
-```
+- **API Testing**: Postman
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-
 Ensure you have the following installed on your machine:
 - Node.js (v16 or higher)
-- MongoDB Community Server & MongoDB Compass
-- Postman (for API testing)
+- MongoDB Compass (or Atlas connection)
 
 ### Installation
 
 1. Clone the repository:
-```bash
-git clone <repository-url>
-cd movies-api
-```
+
+    git clone <your-backend-repo-url>
+    cd <your-backend-folder-name>
 
 2. Install dependencies:
-```bash
-npm install
-```
+
+    npm install
 
 3. Configure Environment Variables:
-Create a `.env` file in the root directory:
-```env
-PORT=3000
-MONGO_URI=mongodb://localhost:27017/movies-api-db
-```
+Create a .env file in the root directory and add:
+
+    PORT=3000
+    MONGO_URI=mongodb://localhost:27017/movies_db
 
 4. Run the Server:
-- For development mode:
-```bash
-npm run dev
-```
-- For production mode:
-```bash
-npm start
-```
+
+    npm run dev
+
+The server will start on http://localhost:3000
 
 ---
 
 ## API Endpoints
 
-| Method | Endpoint      | Description           | Request Body (JSON)              |
-| :----- | :------------ | :-------------------- | :------------------------------- |
-| `GET`  | `/movies`     | Retrieve all movies   | None                             |
-| `POST` | `/movies`     | Create a new movie    | Title, overview, release_date... |
-| `PUT`  | `/movies/:id` | Update a movie by ID  | Fields to update                 |
-| `DELETE`| `/movies/:id`| Delete a movie by ID  | None                             |
-
----
+| Method   | Endpoint      | Description           | Request Body (JSON)              |
+| :------- | :------------ | :-------------------- | :------------------------------- |
+| GET      | /movies       | Retrieve all movies   | None                             |
+| POST     | /movies       | Create a new movie    | Title, overview, release_date... |
+| PUT      | /movies/:id   | Update a movie by ID  | Fields to update                 |
+| DELETE   | /movies/:id   | Delete a movie by ID  | None                             |
