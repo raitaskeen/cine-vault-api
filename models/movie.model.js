@@ -14,6 +14,12 @@ const movieSchema = new mongoose.Schema({
   },
   poster_path: {
     type: String
+  },
+  vote_average: { 
+    type: Number 
+  },
+  original_language: { 
+    type: String 
   }
 });
 
