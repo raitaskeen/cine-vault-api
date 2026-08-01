@@ -16,7 +16,8 @@ const movieSchema = new mongoose.Schema({
     type: String
   },
   vote_average: { 
-    type: Number 
+    type: Number,
+    default: 0, 
   },
   original_language: { 
     type: String 
