@@ -3,26 +3,25 @@ const mongoose = require("mongoose");
 const movieSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true 
+    required: true,
   },
   overview: {
     type: String,
-    default: "" 
+    default: "",
   },
   release_date: {
-    type: String
+    type: String,
   },
   poster_path: {
-    type: String
+    type: String,
   },
-  vote_average: { 
+  vote_average: {
     type: Number,
-    default: 0, 
+    default: 0,
   },
-  original_language: { 
-    type: String 
-  }
+  original_language: {
+    type: String,
+  },
 });
-
 
 module.exports = mongoose.model("Movie", movieSchema);
